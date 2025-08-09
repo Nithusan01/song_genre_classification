@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Music Genre Classifier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">🎵 Music Genre Classifier</h1>
+
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+            <input
+                type="file"
+                name="file"
+                accept=".wav, .mp3"
+                required
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            />
+            <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+            >
+                Predict Genre
+            </button>
+        </form>
+
+        {% if prediction %}
+            <div class="mt-6 text-center">
+                <h2 class="text-xl font-bold text-gray-800">
+                    Prediction: <span class="text-indigo-600">{{ prediction }}</span>
+                </h2>
+                <p class="text-gray-600">Confidence: {{ '%.2f' | format(confidence * 100) }}%</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="mt-6 text-center text-red-600 font-semibold">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
